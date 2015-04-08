@@ -1,8 +1,11 @@
 {
   "name": "three-loaders-collada",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "npm browserify three-loaders-collada",
   "main": "index.js",
+  "repository": {
+    "git": "https://github.com/silviopaganini/three-loaders-collada"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
