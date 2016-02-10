@@ -50,13 +50,21 @@ module.exports = function(THREE){
             upAxis: 'Y',
 
             // For reflective or refractive materials we'll use this cubemap
-            defaultEnvMap: null
+            defaultEnvMap: null,
 
+            // Hide messages by setting to false.
+            logToConsole: true,
         };
 
         var colladaUnit = 1.0;
         var colladaUp = 'Y';
         var upConversion = null;
+
+        function log ( arguments ) {
+            if (logToConsole) {
+                console.log.apply(console, arguments);
+            }
+        }
 
         function load ( url, readyCallback, progressCallback, failCallback ) {
 
@@ -414,7 +422,7 @@ module.exports = function(THREE){
 
             if ( !morphCtrl || !morphCtrl.morph ) {
 
-                console.log("could not find morph controller!");
+                log("could not find morph controller!");
                 return;
 
             }
@@ -452,14 +460,14 @@ module.exports = function(THREE){
 
             if ( !skinCtrl || !skinCtrl.skin ) {
 
-                console.log( "could not find skin controller!" );
+                log( "could not find skin controller!" );
                 return;
 
             }
 
             if ( !ctrl.skeleton || !ctrl.skeleton.length ) {
 
-                console.log( "could not find the skeleton for the skin!" );
+                log( "could not find the skeleton for the skin!" );
                 return;
 
             }
@@ -688,14 +696,14 @@ module.exports = function(THREE){
 
             if ( !skinController || !skinController.skin ) {
 
-                console.log( 'ColladaLoader: Could not find skin controller.' );
+                log( 'ColladaLoader: Could not find skin controller.' );
                 return;
 
             }
 
             if ( !instanceCtrl.skeleton || !instanceCtrl.skeleton.length ) {
 
-                console.log( 'ColladaLoader: Could not find the skeleton for the skin. ' );
+                log( 'ColladaLoader: Could not find the skeleton for the skin. ' );
                 return;
 
             }
@@ -778,7 +786,7 @@ module.exports = function(THREE){
 
             }
 
-            console.log( 'ColladaLoader:', animationBounds.ID + ' has ' + sortedbones.length + ' bones.' );
+            log( 'ColladaLoader:', animationBounds.ID + ' has ' + sortedbones.length + ' bones.' );
 
 
 
@@ -876,7 +884,7 @@ module.exports = function(THREE){
 
                     } else {
 
-                        console.log( 'getJointValue: joint ' + jointIndex + ' doesn\'t exist' );
+                        log( 'getJointValue: joint ' + jointIndex + ' doesn\'t exist' );
 
                     }
 
@@ -892,11 +900,11 @@ module.exports = function(THREE){
 
                         if ( value > joint.limits.max || value < joint.limits.min ) {
 
-                            console.log( 'setJointValue: joint ' + jointIndex + ' value ' + value + ' outside of limits (min: ' + joint.limits.min + ', max: ' + joint.limits.max + ')' );
+                            log( 'setJointValue: joint ' + jointIndex + ' value ' + value + ' outside of limits (min: ' + joint.limits.min + ', max: ' + joint.limits.max + ')' );
 
                         } else if ( joint.static ) {
 
-                            console.log( 'setJointValue: joint ' + jointIndex + ' is static' );
+                            log( 'setJointValue: joint ' + jointIndex + ' is static' );
 
                         } else {
 
@@ -990,7 +998,7 @@ module.exports = function(THREE){
 
                     } else {
 
-                        console.log( 'setJointValue: joint ' + jointIndex + ' doesn\'t exist' );
+                        log( 'setJointValue: joint ' + jointIndex + ' doesn\'t exist' );
 
                     }
 
@@ -1102,7 +1110,7 @@ module.exports = function(THREE){
 
                         }
 
-                        console.log( 'ColladaLoader: Morph-controller partially supported.' );
+                        log( 'ColladaLoader: Morph-controller partially supported.' );
 
                     default:
                         break;
@@ -1462,7 +1470,7 @@ module.exports = function(THREE){
                         if ( sampler.input[ j + 1 ] > t ) {
 
                             value = sampler.output[ j ];
-                            //console.log(value.flatten)
+                            //log(value.flatten)
                             break;
 
                         }
@@ -1561,7 +1569,7 @@ module.exports = function(THREE){
 
                     } else {
 
-                        console.log( 'Could not find transform "' + channel.sid + '" in node ' + node.id );
+                        log( 'Could not find transform "' + channel.sid + '" in node ' + node.id );
 
                     }
 
@@ -1827,7 +1835,7 @@ module.exports = function(THREE){
 
                     default:
 
-                        console.log( child.nodeName );
+                        log( child.nodeName );
                         break;
 
                 }
@@ -1937,7 +1945,7 @@ module.exports = function(THREE){
 
                     default:
 
-                        console.log( child.nodeName );
+                        log( child.nodeName );
                         break;
 
                 }
@@ -2348,7 +2356,7 @@ module.exports = function(THREE){
 
                     default:
 
-                        console.log( child.nodeName );
+                        log( child.nodeName );
                         break;
 
                 }
@@ -2422,7 +2430,7 @@ module.exports = function(THREE){
                     break;
 
                 default:
-                    console.log( 'Can not convert Transform of type ' + this.type );
+                    log( 'Can not convert Transform of type ' + this.type );
                     break;
 
             }
@@ -2528,7 +2536,7 @@ module.exports = function(THREE){
 
                     } else {
 
-                        console.log('Incorrect addressing of matrix in transform.');
+                        log('Incorrect addressing of matrix in transform.');
 
                     }
 
@@ -2748,7 +2756,7 @@ module.exports = function(THREE){
 
                     case 'extra':
 
-                        // console.log( child );
+                        // log( child );
                         break;
 
                     default:
@@ -3105,7 +3113,7 @@ module.exports = function(THREE){
 
                     } else {
 
-                        console.log( 'dropped face with vcount ' + vcount + ' for geometry with id: ' + geom.id );
+                        log( 'dropped face with vcount ' + vcount + ' for geometry with id: ' + geom.id );
 
                     }
 
@@ -3359,7 +3367,7 @@ module.exports = function(THREE){
                         break;
 
                     default:
-                        // console.log(child.nodeName);
+                        // log(child.nodeName);
                         break;
 
                 }
@@ -3378,7 +3386,7 @@ module.exports = function(THREE){
 
             var param = this.accessor.params[ 0 ];
 
-                //console.log(param.name + " " + param.type);
+                //log(param.name + " " + param.type);
 
             switch ( param.type ) {
 
@@ -3401,7 +3409,7 @@ module.exports = function(THREE){
 
                 default:
 
-                    console.log( 'ColladaLoader: Source: Read dont know how to read ' + param.type + '.' );
+                    log( 'ColladaLoader: Source: Read dont know how to read ' + param.type + '.' );
                     break;
 
             }
@@ -3849,7 +3857,7 @@ module.exports = function(THREE){
 
                     default:
 
-                        console.log( "unhandled Surface prop: " + child.nodeName );
+                        log( "unhandled Surface prop: " + child.nodeName );
                         break;
 
                 }
@@ -3913,7 +3921,7 @@ module.exports = function(THREE){
 
                     default:
 
-                        console.log( "unhandled Sampler2D prop: " + child.nodeName );
+                        log( "unhandled Sampler2D prop: " + child.nodeName );
                         break;
 
                 }
@@ -4003,7 +4011,7 @@ module.exports = function(THREE){
 
                     default:
 
-                        console.log( child.nodeName );
+                        log( child.nodeName );
                         break;
 
                 }
@@ -4050,7 +4058,7 @@ module.exports = function(THREE){
 
                     default:
 
-                        console.log( child.nodeName );
+                        log( child.nodeName );
                         break;
 
                 }
@@ -4352,7 +4360,7 @@ module.exports = function(THREE){
 
                     default:
 
-                        console.log(input.semantic);
+                        log(input.semantic);
                         break;
 
                 }
